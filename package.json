@@ -7,7 +7,7 @@
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Randall Degges",
+  "author": "Hemant Kumar",
   "license": "UNLICENSE",
   "dependencies": {
     "bcryptjs": "^2.0.2",
