@@ -56,9 +56,13 @@ router.get('/login', function(req, res) {
  *
  * Once a user is logged in, they will be sent to the dashboard page.
  */
+
+
+
 router.post('/login', function(req, res) {
   models.User.findOne({ email: req.body.email }, 'firstName lastName email password data', function(err, user) {
     if (!user) {
+      res.json(4001);
       res.render('login.jade', { error: "Incorrect email / password." });
     } else {
       if (bcrypt.compareSync(req.body.password, user.password)) {

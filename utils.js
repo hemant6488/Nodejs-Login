@@ -40,7 +40,7 @@ module.exports.createUserSession = function(req, res, user) {
  * @returns {Object} - An Express app object.
  */
 module.exports.createApp = function() {
-  mongoose.connect('mongodb://localhost/ngoconnect1');
+  mongoose.connect('mongodb://localhost/ngo1');
 
   var app = express();
 
