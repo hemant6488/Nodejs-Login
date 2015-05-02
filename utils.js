@@ -1,5 +1,5 @@
 var bodyParser = require('body-parser');
-var csrf = require('csurf');
+//var csrf = require('csurf');
 var express = require('express');
 var mongoose = require('mongoose');
 var session = require('client-sessions');
@@ -45,7 +45,7 @@ module.exports.createApp = function() {
   var app = express();
 
   // settings
-  app.set('view engine', 'jade');
+ // app.set('view engine', 'jade');
 
   // middleware
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -55,7 +55,7 @@ module.exports.createApp = function() {
     duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000,
   }));
-  app.use(csrf());
+  //app.use(csrf());
   app.use(middleware.simpleAuth);
 
   // routes
@@ -72,8 +72,24 @@ module.exports.createApp = function() {
  */
 module.exports.requireLogin = function(req, res, next) {
   if (!req.user) {
-    res.redirect('/login');
+   // res.redirect('/login');
+   res.json({"res_code":4009});
   } else {
     next();
   }
 };
+
+
+/*
+
+Error/ Response Codes:
+4001: Registration Successful, logged in.
+4002: Login Successful.
+4005: Register-> email already taken.
+4006: Error occurred in registration, try again.
+4007: Login Error-> User email not found in database.
+4008: Login Error-> User password incorrect.
+4009: Unauthorized user access, redirect to /login
+4010: Logout Successful
+
+*/

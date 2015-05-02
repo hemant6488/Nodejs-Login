@@ -10,7 +10,7 @@ var router = express.Router();
  * Render the registration page.
  */
 router.get('/register', function(req, res) {
-  res.render('register.jade', { csrfToken: req.csrfToken() });
+ // res.render('register.jade', { csrfToken: req.csrfToken() });
 });
 
 /**
@@ -34,12 +34,16 @@ router.post('/register', function(req, res) {
 
       if (err.code === 11000) {
         error = 'That email is already taken, please try another.';
+        res.json({"res_code":4005});
       }
 
-      res.render('register.jade', { error: error });
+      res.json({"res_code":4006});
+      res.json({ error: error });
+      //res.render('register.jade', { error: error });
     } else {
       utils.createUserSession(req, res, user);
-      res.redirect('/dashboard');
+      res.json({"res_code":4001});
+      //res.redirect('/dashboard');
     }
   });
 });
@@ -48,7 +52,7 @@ router.post('/register', function(req, res) {
  * Render the login page.
  */
 router.get('/login', function(req, res) {
-  res.render('login.jade', { csrfToken: req.csrfToken() });
+ // res.render('login.jade', { csrfToken: req.csrfToken() });
 });
 
 /**
@@ -60,16 +64,19 @@ router.get('/login', function(req, res) {
 
 
 router.post('/login', function(req, res) {
+  console.log(req);
   models.User.findOne({ email: req.body.email }, 'firstName lastName email password data', function(err, user) {
     if (!user) {
-      res.json(4001);
-      res.render('login.jade', { error: "Incorrect email / password." });
+      res.json({"res_code":4007});
+      //res.render('login.jade', { error: "Incorrect email / password." });
     } else {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         utils.createUserSession(req, res, user);
-        res.redirect('/dashboard');
+        res.json({"res_code":4002});
+        //res.redirect('/dashboard');
       } else {
-        res.render('login.jade', { error: "Incorrect email / password."  });
+        res.json({"res_code":4008});
+        //res.render('login.jade', { error: "Incorrect email / password."  });
       }
     }
   });
@@ -81,8 +88,9 @@ router.post('/login', function(req, res) {
 router.get('/logout', function(req, res) {
   if (req.session) {
     req.session.reset();
+    res.json({"res_code":4010});
   }
-  res.redirect('/');
+  //res.redirect('/');
 });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 ## Node.js session based login implementation
 
 This project shows how to implement basic user authentication in a Node.js web
-app. Database used is MongoDB
+app. Database used is MongoDB.
 
 ## Installation
 

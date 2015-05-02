@@ -1,14 +1,14 @@
 {
-  "name": "auth",
+  "name": "NodeJs_Authentication",
   "version": "1.0.0",
-  "description": "A simple Node.js auth example.",
+  "description": "NodeJs Login Implementation",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hemant Kumar",
-  "license": "UNLICENSE",
+  "author_email": "hemant6488@gmail.com",
   "dependencies": {
     "bcryptjs": "^2.0.2",
     "body-parser": "^1.9.0",
@@ -16,6 +16,6 @@
     "csurf": "^1.6.1",
     "express": "^4.9.7",
     "jade": "^1.7.0",
-    "mongoose": "^3.8.17"
+    "mongoose": "3.8.25"
   }
 }
